@@ -1,27 +1,28 @@
 # Pokedex
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.4.
+## Sobre o Projeto:
 
-## Development server
+> Este projeto recria uma Pokédex que consome os dados da Pokeapi. A ideia é ter um Pokédex super completa criada em Angular que pode ser visualisada na tela do celular de uma forma e diferente da no computador. A princípio, apenas criei um Hello World com deploy no Netlify para ir criando aos poucos no meu tempo livre.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<hr>
 
-## Code scaffolding
+## Deploy do projeto:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<https://andy-pokedex.netlify.app/>
 
-## Build
+## Tecnologias_usadas_no_desenvolvimento
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* **TypeScript** Linguagem de programação usada na criação do projeto
+* **Angular** Framework utilizado no desenvolvimento
+* **Bootstrap** Biblioteca de estilização dos componentes
 
-## Running unit tests
+## Etapas Iniciais
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [x] Deploy do projeto no Netlify
+- [x] Instalação do Bootstrap
+- [ ] Conexão com a API: pokeapi
+- [ ] Layout da tela do projeto
+- [ ] Listagem dos Pokemons
+- [ ] Layout da tela de listagem
+- [ ] Exibição de Informações do Pokemon escolhido
+- [ ] Layout da tela do Pokemon escolhido
