@@ -2,7 +2,7 @@
 
 ## Sobre o Projeto:
 
-> Este projeto recria uma Pokédex que consome os dados da Pokeapi. A ideia é ter um Pokédex super completa criada em Angular que pode ser visualisada na tela do celular de uma forma e diferente da no computador. A princípio, apenas criei um Hello World com deploy no Netlify para ir criando aos poucos no meu tempo livre.
+> Este projeto recria uma Pokédex que consome os dados da Pokeapi. A ideia é ter um Pokédex super completa criada em Angular que pode ser visualisada na tela do celular de uma forma e diferente na tela do computador. Estou criando aos poucos no meu tempo livre.
 
 <hr>
 
@@ -20,9 +20,9 @@
 
 - [x] Deploy do projeto no Netlify
 - [x] Instalação do Bootstrap
-- [ ] Conexão com a API: pokeapi
+- [x] Conexão com a API: pokeapi
 - [ ] Layout da tela do projeto
-- [ ] Listagem dos Pokemons
+- [x] Listagem dos Pokemons
 - [ ] Layout da tela de listagem
 - [ ] Exibição de Informações do Pokemon escolhido
 - [ ] Layout da tela do Pokemon escolhido
