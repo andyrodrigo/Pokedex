@@ -1,1 +1,21 @@
-<router-outlet></router-outlet>
+<div class="w-100 d-flex justify-content-center">
+  <main id="pokedex">
+    <header id="cabeca" class="d-flex">
+      <div id="borda" class="circulo">
+        <div id="led1" class="circulo"></div>
+      </div>
+      <div id="led2" class="circulo mini-led"></div>
+      <div id="led3" class="circulo mini-led"></div>
+      <div id="led4" class="circulo mini-led"></div>
+    </header>
+
+    <section id="corpo">
+      <hr />
+      <div id="conteudo">
+        <div id="tela">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
