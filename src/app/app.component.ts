@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Pokedex';
-
-  somar(n1: string, n2: string) {
-    const resposta = Number(n1) + Number(n2);
-    alert(resposta);
-  }
 }

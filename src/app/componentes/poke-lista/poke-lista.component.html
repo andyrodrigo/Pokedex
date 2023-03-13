@@ -1,0 +1,15 @@
+<p>Lista:</p>
+<main>
+  <div *ngFor="let pokemon of pokemons; let i = index">
+    <p>
+      {{ pokemon.id }} - {{ pokemon.name }} ( {{ pokemon.type1! }}
+      {{ pokemon.type2! }} ) -
+      <a [href]="pokemon.url">link</a>
+    </p>
+    <img
+      [src]="pokemon.sprite"
+      style="width: 30px; height: 30px"
+      alt="imagem"
+    />
+  </div>
+</main>
