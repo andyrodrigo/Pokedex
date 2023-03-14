@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { PokeListaComponent } from './componentes/poke-lista/poke-lista.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { ItemListaComponent } from './componentes/item-lista/item-lista.component';
 
 @NgModule({
-  declarations: [AppComponent, PokeListaComponent],
+  declarations: [AppComponent, PokeListaComponent, ItemListaComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

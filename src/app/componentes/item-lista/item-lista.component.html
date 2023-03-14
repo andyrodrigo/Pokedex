@@ -1,0 +1,11 @@
+<main id="corpo">
+  <section id="numero">{{ numero }}</section>
+  <section id="imagem">
+    <img [src]="imagem" alt="imagem do pokemon" />
+  </section>
+  <section id="nome">{{ nome | titlecase }}</section>
+  <section id="tipos">
+    <div class="tipo-nome">{{ tipo1 }}</div>
+    <div *ngIf="tipo2" class="tipo-nome">{{ tipo2 }}</div>
+  </section>
+</main>
