@@ -1,14 +1,11 @@
 <main id="lista">
   <div *ngFor="let pokemon of pokemons; let i = index">
-    <p>
-      {{ pokemon.id }} - {{ pokemon.name }} ( {{ pokemon.type1! }}
-      {{ pokemon.type2! }} ) -
-      <a [href]="pokemon.url">link</a>
-    </p>
-    <img
-      [src]="pokemon.sprite"
-      style="width: 30px; height: 30px"
-      alt="imagem"
-    />
+    <app-item-lista
+      [numero]="pokemon.id!"
+      [imagem]="pokemon.sprite!"
+      [nome]="pokemon.name!"
+      [tipo1]="pokemon.type1!"
+      [tipo2]="pokemon.type2!"
+    ></app-item-lista>
   </div>
 </main>
