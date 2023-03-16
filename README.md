@@ -21,8 +21,8 @@
 - [x] Deploy do projeto no Netlify
 - [x] Instalação do Bootstrap
 - [x] Conexão com a API: pokeapi
-- [ ] Layout da tela do projeto
+- [x] Layout da tela do projeto
 - [x] Listagem dos Pokemons
-- [ ] Layout da tela de listagem
+- [x] Layout da tela de listagem
 - [ ] Exibição de Informações do Pokemon escolhido
 - [ ] Layout da tela do Pokemon escolhido
