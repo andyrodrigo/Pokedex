@@ -1,8 +1,9 @@
 #corpo {
   display: flex;
-  background-color: aliceblue;
+  background-color: #dddddd;
   flex-grow: 1;
   height: 60px;
+  width: 99%;
   border: solid black 1px;
   border-radius: 10px;
   margin: 1px;

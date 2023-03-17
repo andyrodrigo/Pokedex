@@ -1,0 +1,37 @@
+<main>
+  <header id="cabecalho">
+    <div id="numero">{{ pokemon.id }}</div>
+    <div id="nome">- {{ pokemon.nome }}</div>
+    <div id="tipos">
+      <div class="tipo-nome" [style.background-color]="corTipo1">
+        {{ pokemon.tipo_1 }}
+      </div>
+      <div
+        class="tipo-nome"
+        [style.background-color]="corTipo2"
+        *ngIf="pokemon.tipo_2"
+      >
+        {{ pokemon.tipo_2 }}
+      </div>
+    </div>
+  </header>
+
+  <section id="telaImagem">
+    <button class="botao" (click)="proximo(false)">Anterior</button>
+    <div id="habitat" [style.background-image]="'url(' + pokemon.habitat + ')'">
+      <img id="imagem" [src]="pokemon.imagem" alt="imagem do pokemon" />
+    </div>
+    <button class="botao" (click)="proximo(true)">Próximo</button>
+  </section>
+
+  <section id="modo">
+    <button class="botao" (click)="voltar()">Voltar</button>
+    <button class="botao">Modo da Dex</button>
+  </section>
+
+  <section id="dex">
+    <div id="telaTextos">
+      <p *ngFor="let item of pokemon.info">{{ item["texto"] }}</p>
+    </div>
+  </section>
+</main>
