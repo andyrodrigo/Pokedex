@@ -7,9 +7,10 @@ import { PokeListaComponent } from './componentes/poke-lista/poke-lista.componen
 
 import { HttpClientModule } from '@angular/common/http';
 import { ItemListaComponent } from './componentes/item-lista/item-lista.component';
+import { PokeInfoComponent } from './componentes/poke-info/poke-info.component';
 
 @NgModule({
-  declarations: [AppComponent, PokeListaComponent, ItemListaComponent],
+  declarations: [AppComponent, PokeListaComponent, ItemListaComponent, PokeInfoComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
