@@ -1,5 +1,5 @@
 export enum Habitats {
-  padrao = '/assets/images/missingNumber.png',
+  padrao = '/assets/images/padrao.png',
   grassland = '/assets/images/grassland2.png',
   forest = '/assets/images/forest1.png',
   cave = '/assets/images/cave2.png',
@@ -9,4 +9,8 @@ export enum Habitats {
   sea = '/assets/images/sea1.png',
   urban = '/assets/images/urban1.png',
   rare = '/assets/images/rare.png',
+  iceland = '/assets/images/cave3.png',
+  high_mountain = '/assets/images/mountain2.png',
+  dark_cave = '/assets/images/cave1.png',
+  dark_forest = '/assets/images/forest2.png',
 }

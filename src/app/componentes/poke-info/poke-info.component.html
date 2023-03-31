@@ -1,7 +1,7 @@
 <main>
   <header id="cabecalho">
     <div id="numero">{{ pokemon.id }}</div>
-    <div id="nome">- {{ pokemon.nome }}</div>
+    <div id="nome">-{{ pokemon.nome | titlecase }}</div>
     <div id="tipos">
       <div class="tipo-nome" [style.background-color]="corTipo1">
         {{ pokemon.tipo_1 }}
@@ -17,11 +17,15 @@
   </header>
 
   <section id="telaImagem">
-    <button class="botao" (click)="proximo(false)">Anterior</button>
-    <div id="habitat" [style.background-image]="'url(' + pokemon.habitat + ')'">
+    <button class="botao" (click)="proximo(false)"><</button>
+    <div
+      *ngIf="carregadaTodasInfomacoes"
+      id="habitat"
+      [style.background-image]="'url(' + pokemon.habitat + ')'"
+    >
       <img id="imagem" [src]="pokemon.imagem" alt="imagem do pokemon" />
     </div>
-    <button class="botao" (click)="proximo(true)">Próximo</button>
+    <button class="botao" (click)="proximo(true)">></button>
   </section>
 
   <section id="modo">

@@ -12,7 +12,8 @@ export class PokeListaComponent implements OnInit {
   dados: any;
   pokemons: IPokemon[] = [];
   offset: number = 0; //a partir de
-  limit: number = 151;
+  limit: number = 649;
+  getAll: Boolean = false;
 
   constructor(private pokeService: PokemonService) {}
 
@@ -27,6 +28,7 @@ export class PokeListaComponent implements OnInit {
         this.pokemons = this.dados.results;
         this.montarPokemon();
         this.offset = this.offset + this.limit;
+        this.getAll = true;
       },
       error: (resposta) => {
         console.log('Falha de conexão com PokeApi: ', resposta);

@@ -1,6 +1,7 @@
 <main id="lista">
   <div *ngFor="let pokemon of pokemons; let i = index">
     <app-item-lista
+      *ngIf="getAll"
       [numero]="pokemon.id!"
       [imagem]="pokemon.sprite!"
       [nome]="pokemon.name!"
