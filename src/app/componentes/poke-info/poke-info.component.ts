@@ -20,6 +20,9 @@ export class PokeInfoComponent implements OnInit {
     private pokeService: PokemonService
   ) {}
 
+  max = 1008;
+  carregadaTodasInfomacoes: Boolean = false;
+
   pokemon = {
     id: 0,
     nome: 'Missing Nº',
@@ -54,9 +57,15 @@ export class PokeInfoComponent implements OnInit {
   }
 
   private obterDados(dados: any): void {
+    console.log('dados: ', dados);
     this.pokemon.id = dados.id;
     this.pokemon.nome = dados.name;
-    this.pokemon.imagem = `${this.SPRITE_URL}/${dados.id}.gif`;
+    if (dados.id < 650) {
+      this.pokemon.imagem = `${this.SPRITE_URL}/${dados.id}.gif`;
+    } else {
+      this.pokemon.imagem = dados.sprites.front_default;
+    }
+
     this.pokemon.altura = dados.height;
     this.pokemon.peso = dados.weight;
     this.pokemon.habilidades = dados.abilities;
@@ -71,6 +80,7 @@ export class PokeInfoComponent implements OnInit {
     this.pokeService.consultarEspecie(dados.id).subscribe({
       next: (resposta) => {
         this.obterMaisDados(resposta);
+        this.carregadaTodasInfomacoes = true;
       },
       error: (resposta) => {
         console.log('Erro: ', resposta);
@@ -79,6 +89,7 @@ export class PokeInfoComponent implements OnInit {
   }
 
   private obterMaisDados(dados: any): void {
+    //console.log('dados: ', dados);
     const textosUnicos = dados.flavor_text_entries.reduce(
       (acc: any, entry: any) => {
         if (entry.language.name === 'en') {
@@ -97,9 +108,73 @@ export class PokeInfoComponent implements OnInit {
 
     this.pokemon.info = Object.values(textosUnicos);
 
-    const habitat = dados.habitat.name.replace(/-/g, '_');
+    let habitat = null;
+    if (
+      dados.generation.name === 'generation-iv' ||
+      'generation-v' ||
+      'generation-vi'
+    ) {
+      if (dados.is_legendary) {
+        habitat = 'rare';
+      } else {
+        habitat = this.criarHabitat(this.pokemon.tipo_1);
+      }
+    } else {
+      if (dados.habitat !== null)
+        habitat = dados.habitat.name!.replace(/-/g, '_');
+    }
+
+    // if (
+    //   habitat === Habitats.sea &&
+    //   (this.pokemon.tipo_1 == 'Flying' || this.pokemon.tipo_2! == 'Flying')
+    // ){
+
+    // }
     this.pokemon.habitat =
       Habitats[habitat as keyof typeof Habitats] || Habitats.padrao;
+
+    console.log(this.pokemon.habitat);
+  }
+
+  private criarHabitat(tipo: string | null): string {
+    let resposta = 'padrao';
+    if (tipo) {
+      switch (tipo) {
+        case 'ground':
+          resposta = 'rough_terrain';
+          break;
+        case 'water':
+          resposta = 'sea';
+          break;
+        case 'grass':
+          resposta = 'grassland';
+          break;
+        case 'bug':
+          resposta = 'forest';
+          break;
+        case 'water':
+          resposta = 'sea';
+          break;
+        case 'fighting':
+          resposta = 'urban';
+          break;
+        case 'rock':
+          resposta = 'high_mountain';
+          break;
+        case 'ghost':
+          resposta = 'dark_cave';
+          break;
+        case 'dark':
+          resposta = 'dark_forest';
+          break;
+        case 'ice':
+          resposta = 'iceland';
+          break;
+        default:
+          resposta = 'padrao';
+      }
+    }
+    return resposta;
   }
 
   // private obterMaisDados(dados: any): void {
@@ -121,12 +196,13 @@ export class PokeInfoComponent implements OnInit {
   }
 
   protected proximo(proximo: boolean): void {
+    this.carregadaTodasInfomacoes = false;
     if (proximo) {
       this.pokemon.id = this.pokemon.id + 1;
-      if (this.pokemon.id > 151) this.pokemon.id = 1;
+      if (this.pokemon.id > this.max) this.pokemon.id = 1;
     } else {
       this.pokemon.id = this.pokemon.id - 1;
-      if (this.pokemon.id < 1) this.pokemon.id = 151;
+      if (this.pokemon.id < 1) this.pokemon.id = this.max;
     }
     this.router.navigate([`info/${this.pokemon.id}`]);
     this.carregarPokemon(this.pokemon.id);

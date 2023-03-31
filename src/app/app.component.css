@@ -28,22 +28,47 @@
 }
 
 #led1 {
-  background-color: #19699e;
+  background: radial-gradient(circle at 50% 50%, #b7cfdf, #4c7692, #19699e);
   border: solid black 1px;
   width: 70px;
   height: 70px;
+  animation: changeColor 3s linear;
+}
+
+@keyframes changeColor {
+  0% {
+    background-color: #9e011d;
+  }
+  20% {
+    background-color: orange;
+  }
+  40% {
+    background-color: #f1da37;
+  }
+  60% {
+    background-color: #499a56;
+  }
+  80% {
+    background-color: #19699e;
+  }
+  100% {
+    background-color: purple;
+  }
 }
 
 #led2 {
   background-color: #9e011d;
+  animation: changeColor 1s infinite;
 }
 
 #led3 {
   background-color: #f1da37;
+  animation: changeColor 1.5s infinite;
 }
 
 #led4 {
   background-color: #499a56;
+  animation: changeColor 2s infinite;
 }
 
 .circulo {
