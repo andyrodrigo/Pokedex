@@ -14,10 +14,42 @@ export class PokeListaComponent implements OnInit {
   offset: number = 0; //a partir de
   limit: number = 649;
   getAll: Boolean = false;
+  chamado: Boolean = false;
 
   constructor(private pokeService: PokemonService) {}
 
   ngOnInit(): void {
+    this.pokemons = [];
+  }
+
+  protected chamarGeracao(geracao: number) {
+    switch (geracao) {
+      case 1:
+        this.offset = 0;
+        this.limit = 151;
+        break;
+      case 2:
+        this.offset = 151;
+        this.limit = 100;
+        break;
+      case 3:
+        this.offset = 251;
+        this.limit = 135;
+        break;
+      case 4:
+        this.offset = 386;
+        this.limit = 107;
+        break;
+      case 5:
+        this.offset = 493;
+        this.limit = 156;
+        break;
+      default:
+        this.offset = 0;
+        this.limit = 649;
+        break;
+    }
+    this.chamado = true;
     this.buscarLista();
   }
 
@@ -37,8 +69,8 @@ export class PokeListaComponent implements OnInit {
   }
 
   montarPokemon() {
-    for (let i = this.offset; i < this.limit; i++) {
-      this.pokeService.consultarPokemon(i + 1).subscribe({
+    for (let i = 0; i < this.limit; i++) {
+      this.pokeService.consultarPokemon(this.offset + i + 1).subscribe({
         next: (resposta) => {
           const dados = resposta;
           this.pokemons[i].id = dados.id;

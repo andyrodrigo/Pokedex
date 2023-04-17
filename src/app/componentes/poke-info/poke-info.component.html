@@ -29,13 +29,35 @@
   </section>
 
   <section id="modo">
-    <button class="botao" (click)="voltar()">Voltar</button>
-    <button class="botao">Modo da Dex</button>
+    <button class="botao" (click)="voltar()">Back</button>
+    <button class="botao" (click)="mudar()">Mode</button>
   </section>
 
   <section id="dex">
-    <div id="telaTextos">
+    <div id="telaAtributos" *ngIf="modo == 1">
+      <app-stats
+        [ataqueF]="pokemon.ataqueF"
+        [ataqueE]="pokemon.ataqueE"
+        [defesaF]="pokemon.defesaF"
+        [defesaE]="pokemon.defesaE"
+        [velocidade]="pokemon.velocidade"
+        [saude]="pokemon.saude"
+      ></app-stats>
+    </div>
+
+    <div id="telaTextos" *ngIf="modo == 2">
       <p *ngFor="let item of pokemon.info">{{ item["texto"] }}</p>
+    </div>
+
+    <div id="telaHabilidades" *ngIf="modo == 1">
+      <app-stats
+        [ataqueF]="pokemon.ataqueF"
+        [ataqueE]="pokemon.ataqueE"
+        [defesaF]="pokemon.defesaF"
+        [defesaE]="pokemon.defesaE"
+        [velocidade]="pokemon.velocidade"
+        [saude]="pokemon.saude"
+      ></app-stats>
     </div>
   </section>
 </main>
