@@ -1,0 +1,141 @@
+<main id="caixa">
+  <section id="fisico" class="atributo">
+    <span class="span_nome">Physical</span>
+    <span class="span_atr">Attack: {{ ataqueF }}</span>
+
+    <div class="caixa_barra">
+      <div class="barra">
+        <div
+          class="barra_colorida"
+          [style.width.%]="ataqueF1"
+          [style.backgroundColor]="cores.ataqueF"
+        ></div>
+      </div>
+
+      <div class="barra" *ngIf="maisAtaqueF">
+        <div
+          class="barra_colorida"
+          [style.width.%]="ataqueF2"
+          [style.backgroundColor]="cores.ataqueF"
+        ></div>
+      </div>
+    </div>
+
+    <span class="span_atr">Defense: {{ defesaF }}</span>
+    <div class="caixa_barra">
+      <div class="barra">
+        <div
+          class="barra_colorida"
+          [style.width.%]="defesaF1"
+          [style.backgroundColor]="cores.defesaF"
+        ></div>
+      </div>
+      <div class="barra" *ngIf="maisDefesaF">
+        <div
+          class="barra_colorida"
+          [style.width.%]="defesaF2"
+          [style.backgroundColor]="cores.defesaF"
+        ></div>
+      </div>
+      <div class="barra" *ngIf="superDefesaF">
+        <div
+          class="barra_colorida"
+          [style.width.%]="defesaF3"
+          [style.backgroundColor]="cores.defesaF"
+        ></div>
+      </div>
+    </div>
+  </section>
+  <section id="especial" class="atributo">
+    <span class="span_nome">Special</span>
+    <span class="span_atr">Attack: {{ ataqueE }}</span>
+    <div class="caixa_barra">
+      <div class="barra">
+        <div
+          class="barra_colorida"
+          [style.width.%]="ataqueE1"
+          [style.backgroundColor]="cores.ataqueE"
+        ></div>
+      </div>
+      <div class="barra" *ngIf="maisAtaqueE">
+        <div
+          class="barra_colorida"
+          [style.width.%]="ataqueE2"
+          [style.backgroundColor]="cores.ataqueE"
+        ></div>
+      </div>
+    </div>
+    <span class="span_atr">Defense: {{ defesaE }}</span>
+    <div class="caixa_barra">
+      <div class="barra">
+        <div
+          class="barra_colorida"
+          [style.width.%]="defesaE1"
+          [style.backgroundColor]="cores.defesaE"
+        ></div>
+      </div>
+      <div class="barra" *ngIf="maisDefesaE">
+        <div
+          class="barra_colorida"
+          [style.width.%]="defesaE2"
+          [style.backgroundColor]="cores.defesaE"
+        ></div>
+      </div>
+      <div class="barra" *ngIf="superDefesaE">
+        <div
+          class="barra_colorida"
+          [style.width.%]="defesaE3"
+          [style.backgroundColor]="cores.defesaE"
+        ></div>
+      </div>
+    </div>
+  </section>
+  <section id="energia" class="atributo">
+    <span class="span_nome">Energy</span>
+    <span class="span_atr">Speed: {{ velocidade }}</span>
+    <div class="caixa_barra">
+      <div class="barra">
+        <div
+          class="barra_colorida"
+          [style.width.%]="velocidade1"
+          [style.backgroundColor]="cores.velocidade"
+        ></div>
+      </div>
+      <div class="barra" *ngIf="maisVelocidade">
+        <div
+          class="barra_colorida"
+          [style.width.%]="velocidade2"
+          [style.backgroundColor]="cores.velocidade"
+        ></div>
+      </div>
+    </div>
+
+    <span class="span_atr">Health: {{ saude }}</span>
+
+    <div class="caixa_barra">
+      <div class="barra">
+        <div
+          class="barra_colorida"
+          [style.width.%]="saude1"
+          [style.backgroundColor]="cores.saude"
+        ></div>
+      </div>
+
+      <div class="barra" *ngIf="maisSaude">
+        <div
+          class="barra_colorida"
+          [style.width.%]="saude2"
+          [style.backgroundColor]="cores.saude"
+        ></div>
+      </div>
+
+      <div class="barra" *ngIf="superSaude">
+        <div
+          class="barra_colorida"
+          [style.width.%]="saude3"
+          [style.backgroundColor]="cores.saude"
+        ></div>
+      </div>
+    </div>
+  </section>
+</main>

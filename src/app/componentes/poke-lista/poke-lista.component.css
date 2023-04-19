@@ -1,3 +1,20 @@
 #lista {
   background-color: lightgray;
 }
+
+#caixa_geracao {
+  height: 100%;
+  background-color: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.botao {
+  margin: 2px;
+  border-radius: 10px;
+  font-family: monospace;
+  background-color: #00302a;
+  color: #dddddd;
+  width: 90%;
+}

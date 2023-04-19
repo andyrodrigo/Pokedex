@@ -20,6 +20,7 @@ export class PokeInfoComponent implements OnInit {
     private pokeService: PokemonService
   ) {}
 
+  modo: number = 1;
   max = 1008;
   carregadaTodasInfomacoes: Boolean = false;
 
@@ -33,7 +34,12 @@ export class PokeInfoComponent implements OnInit {
     tipo_1: null,
     tipo_2: null,
     habilidades: [],
-    estatisticas: [],
+    ataqueF: '',
+    defesaF: '',
+    ataqueE: '',
+    defesaE: '',
+    velocidade: '',
+    saude: '',
     info: [],
   };
 
@@ -75,7 +81,12 @@ export class PokeInfoComponent implements OnInit {
     this.pokemon.tipo_2 = dados.types[1]?.type.name;
     this.corTipo2 =
       Tipos[dados.types[1]?.type.name as keyof typeof Tipos] || Tipos.semTipo;
-    this.pokemon.estatisticas = dados.stats;
+    this.pokemon.ataqueF = dados.stats[1].base_stat;
+    this.pokemon.defesaF = dados.stats[2].base_stat;
+    this.pokemon.ataqueE = dados.stats[3].base_stat;
+    this.pokemon.defesaE = dados.stats[4].base_stat;
+    this.pokemon.velocidade = dados.stats[5].base_stat;
+    this.pokemon.saude = dados.stats[0].base_stat;
 
     this.pokeService.consultarEspecie(dados.id).subscribe({
       next: (resposta) => {
@@ -107,29 +118,73 @@ export class PokeInfoComponent implements OnInit {
     );
 
     this.pokemon.info = Object.values(textosUnicos);
-
+    let geracao = dados.generation.name;
+    let forma;
+    if (dados.shape !== null) {
+      forma = dados.shape.name;
+    } else {
+      forma = 'semForma';
+    }
+    console.log(forma);
     let habitat = null;
     if (
-      dados.generation.name === 'generation-iv' ||
-      'generation-v' ||
-      'generation-vi'
+      geracao === 'generation-i' ||
+      geracao === 'generation-ii' ||
+      geracao === 'generation-iii'
     ) {
-      if (dados.is_legendary) {
-        habitat = 'rare';
-      } else {
-        habitat = this.criarHabitat(this.pokemon.tipo_1);
-      }
-    } else {
       if (dados.habitat !== null)
         habitat = dados.habitat.name!.replace(/-/g, '_');
+      if (habitat === 'waters_edge' && forma === 'fish') {
+        habitat = 'river';
+      } else if (habitat === 'sea') {
+        if (
+          (forma === 'fish' && this.pokemon.nome !== 'lapras') ||
+          forma === 'tentacles' ||
+          forma == 'ball' ||
+          forma === 'blob' ||
+          forma === 'squiggle' ||
+          forma === 'armor'
+        ) {
+          habitat = 'deep_sea';
+        } else if (forma === 'upright' || forma === 'quadruped') {
+          habitat = 'beach';
+        }
+      } else if (
+        (habitat === 'cave' && this.pokemon.tipo_1 == 'ice') ||
+        (habitat === 'mountain' && this.pokemon.tipo_1 == 'ice') ||
+        this.pokemon.nome === 'articuno'
+      ) {
+        habitat = 'iceland';
+      } else if (this.pokemon.nome === 'lugia') {
+        habitat = 'sea';
+      } else if (
+        this.pokemon.nome === 'zapdos' ||
+        this.pokemon.nome === 'ho-oh' ||
+        this.pokemon.nome === 'rayquaza'
+      ) {
+        habitat = 'sky';
+      }
+    } else {
+      if (forma == 'fish') {
+        habitat = 'deep_sea';
+      } else {
+        if (dados.is_legendary) {
+          console.log('HEY ', this.pokemon.nome);
+          if (
+            this.pokemon.nome === 'tornadus-incarnate' ||
+            this.pokemon.nome === 'landorus-incarnate' ||
+            this.pokemon.nome === 'thundurus-incarnate' ||
+            this.pokemon.nome === 'enamorus-incarnate'
+          ) {
+            habitat = 'sky';
+          } else {
+            habitat = 'rare';
+          }
+        } else {
+          habitat = this.criarHabitat(this.pokemon.tipo_1);
+        }
+      }
     }
-
-    // if (
-    //   habitat === Habitats.sea &&
-    //   (this.pokemon.tipo_1 == 'Flying' || this.pokemon.tipo_2! == 'Flying')
-    // ){
-
-    // }
     this.pokemon.habitat =
       Habitats[habitat as keyof typeof Habitats] || Habitats.padrao;
 
@@ -143,17 +198,18 @@ export class PokeInfoComponent implements OnInit {
         case 'ground':
           resposta = 'rough_terrain';
           break;
+        case 'steel':
+        case 'fire':
+          resposta = 'rocks';
+          break;
         case 'water':
-          resposta = 'sea';
+          resposta = 'beach';
           break;
         case 'grass':
           resposta = 'grassland';
           break;
         case 'bug':
           resposta = 'forest';
-          break;
-        case 'water':
-          resposta = 'sea';
           break;
         case 'fighting':
           resposta = 'urban';
@@ -162,8 +218,6 @@ export class PokeInfoComponent implements OnInit {
           resposta = 'high_mountain';
           break;
         case 'ghost':
-          resposta = 'dark_cave';
-          break;
         case 'dark':
           resposta = 'dark_forest';
           break;
@@ -190,6 +244,14 @@ export class PokeInfoComponent implements OnInit {
   //   this.pokemon.habitat =
   //     Habitats[habitat as keyof typeof Habitats] || Habitats.padrao;
   // }
+
+  mudar() {
+    if (this.modo == 1) {
+      this.modo = 2;
+    } else {
+      this.modo = 1;
+    }
+  }
 
   protected voltar(): void {
     this.router.navigate(['']);
