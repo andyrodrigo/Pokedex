@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { config } from 'src/app/config/config';
 import { Habitats } from 'src/app/enumerations/habitat.enum';
@@ -11,8 +12,10 @@ import { PokemonService } from 'src/app/servicos/pokemon.service';
   templateUrl: './poke-info.component.html',
   styleUrls: ['./poke-info.component.css'],
 })
-export class PokeInfoComponent implements OnInit {
+export class PokeInfoComponent implements OnInit, OnDestroy {
   private readonly SPRITE_URL: string = `${config['spriteUrl']}`;
+  inscricaoEspecie!: Subscription;
+  inscricaoPoke!: Subscription;
 
   constructor(
     private router: Router,
@@ -51,19 +54,24 @@ export class PokeInfoComponent implements OnInit {
     if (id) this.carregarPokemon(Number(id));
   }
 
+  ngOnDestroy(): void {
+    if (this.inscricaoEspecie) this.inscricaoEspecie.unsubscribe();
+    if (this.inscricaoPoke) this.inscricaoPoke.unsubscribe();
+  }
+
   private carregarPokemon(id: number) {
-    this.pokeService.consultarPokemon(id).subscribe({
-      next: (resposta) => {
-        this.obterDados(resposta);
-      },
+    this.inscricaoPoke = this.pokeService.consultarPokemon(id).subscribe({
       error: (resposta) => {
         console.log('Erro: ', resposta);
+      },
+      next: (resposta) => {
+        this.obterDados(resposta);
       },
     });
   }
 
   private obterDados(dados: any): void {
-    console.log('dados: ', dados);
+    //console.log('dados: ', dados);
     this.pokemon.id = dados.id;
     this.pokemon.nome = dados.name;
     if (dados.id < 650) {
@@ -76,9 +84,9 @@ export class PokeInfoComponent implements OnInit {
     this.pokemon.peso = dados.weight;
     this.pokemon.habilidades = dados.abilities;
     this.pokemon.tipo_1 = dados.types[0].type.name;
+    this.pokemon.tipo_2 = dados.types[1]?.type.name;
     this.corTipo1 =
       Tipos[dados.types[0].type.name as keyof typeof Tipos] || Tipos.semTipo;
-    this.pokemon.tipo_2 = dados.types[1]?.type.name;
     this.corTipo2 =
       Tipos[dados.types[1]?.type.name as keyof typeof Tipos] || Tipos.semTipo;
     this.pokemon.ataqueF = dados.stats[1].base_stat;
@@ -88,15 +96,19 @@ export class PokeInfoComponent implements OnInit {
     this.pokemon.velocidade = dados.stats[5].base_stat;
     this.pokemon.saude = dados.stats[0].base_stat;
 
-    this.pokeService.consultarEspecie(dados.id).subscribe({
-      next: (resposta) => {
-        this.obterMaisDados(resposta);
-        this.carregadaTodasInfomacoes = true;
-      },
-      error: (resposta) => {
-        console.log('Erro: ', resposta);
-      },
-    });
+    this.inscricaoEspecie = this.pokeService
+      .consultarEspecie(dados.id)
+      .subscribe({
+        error: (resposta) => {
+          console.log('Erro: ', resposta);
+        },
+        next: (resposta) => {
+          this.obterMaisDados(resposta);
+        },
+        complete: () => {
+          this.carregadaTodasInfomacoes = true;
+        },
+      });
   }
 
   private obterMaisDados(dados: any): void {
@@ -125,7 +137,7 @@ export class PokeInfoComponent implements OnInit {
     } else {
       forma = 'semForma';
     }
-    console.log(forma);
+    //console.log(forma);
     let habitat = null;
     if (
       geracao === 'generation-i' ||
@@ -245,7 +257,7 @@ export class PokeInfoComponent implements OnInit {
   //     Habitats[habitat as keyof typeof Habitats] || Habitats.padrao;
   // }
 
-  mudar() {
+  protected mudar() {
     if (this.modo == 1) {
       this.modo = 2;
     } else {

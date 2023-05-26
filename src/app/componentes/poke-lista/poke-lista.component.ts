@@ -1,110 +1,134 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 import { PokemonService } from 'src/app/servicos/pokemon.service';
-import { IPokemon } from 'src/app/models/pokemon.model';
+import { IPokemonItem, PokemonItem } from 'src/app/models/pokemonItem.model';
 
 @Component({
   selector: 'app-poke-lista',
   templateUrl: './poke-lista.component.html',
   styleUrls: ['./poke-lista.component.css'],
 })
-export class PokeListaComponent implements OnInit {
-  dados: any;
-  pokemons: IPokemon[] = [];
+export class PokeListaComponent implements OnInit, OnDestroy {
+  inscricaoLista!: Subscription;
+  inscricaoPoke!: Subscription;
+  pokemons: IPokemonItem[] = [];
   offset: number = 0; //a partir de
-  limit: number = 649;
+  limit: number = 10;
+  maxLimit: number = 649;
+  refIndice = 0;
   getAll: Boolean = false;
   chamado: Boolean = false;
+  carregando: boolean = false;
+
+  opcoes: string[] = [
+    "Get'em all",
+    'Generation 1',
+    'Generation 2',
+    'Generation 3',
+    'Generation 4',
+    'Generation 5',
+  ];
 
   constructor(private pokeService: PokemonService) {}
 
   ngOnInit(): void {
-    this.pokemons = [];
+    this.gerarPokemons();
   }
 
-  protected chamarGeracao(geracao: number) {
-    switch (geracao) {
-      case 1:
-        this.offset = 0;
-        this.limit = 151;
-        break;
-      case 2:
-        this.offset = 151;
-        this.limit = 100;
-        break;
-      case 3:
-        this.offset = 251;
-        this.limit = 135;
-        break;
-      case 4:
-        this.offset = 386;
-        this.limit = 107;
-        break;
-      case 5:
-        this.offset = 493;
-        this.limit = 156;
-        break;
-      default:
-        this.offset = 0;
-        this.limit = 649;
-        break;
+  ngOnDestroy(): void {
+    if (this.inscricaoLista) this.inscricaoLista.unsubscribe();
+    if (this.inscricaoPoke) this.inscricaoPoke.unsubscribe();
+  }
+
+  private gerarPokemons() {
+    this.carregando = true;
+
+    const requests = [];
+    const tamanho = Math.min(this.limit, this.maxLimit - this.pokemons.length);
+    const quantidade = this.pokemons.length;
+
+    for (let i = 0; i < tamanho; i++) {
+      const indice = this.pokemons.length;
+      const consulta = this.offset + indice + 1;
+      this.pokemons[indice] = new PokemonItem();
+      const request = this.pokeService.consultarPokemon(consulta);
+      requests.push(request);
     }
-    this.chamado = true;
-    this.buscarLista();
-  }
 
-  private buscarLista(): void {
-    this.pokeService.consultarPokemons(this.limit, this.offset).subscribe({
-      next: (resposta) => {
-        this.dados = resposta;
-        this.pokemons = this.dados.results;
-        this.montarPokemon();
-        this.offset = this.offset + this.limit;
-        this.getAll = true;
+    this.inscricaoPoke = forkJoin(requests).subscribe({
+      next: (respostas) => {
+        respostas.forEach((resposta, index) => {
+          const dados = resposta;
+          const indice = quantidade + index;
+          this.incluirPokemon(dados, indice);
+        });
       },
       error: (resposta) => {
         console.log('Falha de conexão com PokeApi: ', resposta);
       },
+      complete: () => {
+        this.carregando = false;
+      },
     });
   }
 
-  montarPokemon() {
-    for (let i = 0; i < this.limit; i++) {
-      this.pokeService.consultarPokemon(this.offset + i + 1).subscribe({
-        next: (resposta) => {
-          const dados = resposta;
-          this.pokemons[i].id = dados.id;
-          this.pokemons[i].type1 = dados.types[0].type.name;
-          if (dados.types.length == 2) {
-            this.pokemons[i].type2 = dados.types[1].type.name;
-          }
-          this.pokemons[i].sprite =
-            dados.sprites.other.dream_world.front_default;
-        },
-        error: (resposta) => {
-          console.log('Falha de conexão com PokeApi: ', resposta);
-        },
-      });
+  incluirPokemon(dados: any, indice: number) {
+    this.pokemons[indice] = new PokemonItem(
+      dados.id,
+      dados.name,
+      dados.sprites.other.dream_world.front_default,
+      dados.types[0].type.name,
+      dados.types.length === 2 ? dados.types[1].type.name : ''
+    );
+  }
+
+  protected aoRolar(event: any) {
+    const element = event.target;
+    const fim_rolagem =
+      element.scrollHeight - element.scrollTop === element.clientHeight;
+
+    if (
+      fim_rolagem &&
+      !this.carregando &&
+      this.pokemons.length < this.maxLimit
+    ) {
+      this.gerarPokemons();
     }
   }
-}
 
-// this.pokeService
-//   .consultarPokemon((i + 1).toString())
-//   .subscribe((resposta) => {
-//     let dados = resposta;
-//     console.log(dados);
-//     this.pokemons[i].id = dados.id;
-//     this.pokemons[i].type1 = dados.types[0].type.name;
-//     if (dados.types.length == 2) {
-//       this.pokemons[i].type2 = dados.types[1].type.name;
-//     }
-//     this.pokemons[i].sprite =
-//       dados.sprites.other.dream_world.front_default;
-//     //this.pokemons[i].sprite = dados.sprites.other.home.front_default;
-//     /*this.pokemons[
-//     i
-//   ].sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-//     i + 1
-//   }.png`;*/
-//   });
+  protected mudarLista(valorSelecionado: any) {
+    const configuracoes = {
+      [this.opcoes[1]]: { offset: 0, maxLimit: 150 },
+      [this.opcoes[2]]: { offset: 151, maxLimit: 100 },
+      [this.opcoes[3]]: { offset: 251, maxLimit: 135 },
+      [this.opcoes[4]]: { offset: 386, maxLimit: 107 },
+      [this.opcoes[5]]: { offset: 493, maxLimit: 156 },
+    };
+
+    const configuracao = configuracoes[valorSelecionado] || {
+      offset: 0,
+      maxLimit: 649,
+    };
+    this.pokemons = [];
+    this.offset = configuracao.offset;
+    this.maxLimit = configuracao.maxLimit;
+    this.gerarPokemons();
+  }
+
+  // private buscarLista(): void {
+  //   this.inscricaoLista = this.pokeService
+  //     .consultarPokemons(this.limit, this.offset)
+  //     .subscribe({
+  //       error: (resposta) => {
+  //         console.log('Falha de conexão com PokeApi: ', resposta);
+  //       },
+  //       next: (resposta) => {
+  //         const dados = resposta;
+  //         this.pokemons = dados.results;
+  //         this.getAll = true;
+  //       },
+  //     });
+  // }
+}

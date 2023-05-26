@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PokeListaComponent } from './componentes/poke-lista/poke-lista.component';
-
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+
+import { layoutComponent } from './core/layout.component';
+import { PokeListaComponent } from './componentes/poke-lista/poke-lista.component';
 import { ItemListaComponent } from './componentes/item-lista/item-lista.component';
 import { PokeInfoComponent } from './componentes/poke-info/poke-info.component';
 import { StatsComponent } from './componentes/stats/stats.component';
 
 @NgModule({
-  declarations: [AppComponent, PokeListaComponent, ItemListaComponent, PokeInfoComponent, StatsComponent],
+  declarations: [
+    AppComponent,
+    layoutComponent,
+    PokeListaComponent,
+    ItemListaComponent,
+    PokeInfoComponent,
+    StatsComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
