@@ -18,13 +18,16 @@
 
   <section id="telaImagem">
     <button class="botao" (click)="proximo(false)"><</button>
-    <div
-      *ngIf="carregadaTodasInfomacoes"
-      id="habitat"
-      [style.background-image]="'url(' + pokemon.habitat + ')'"
-    >
-      <img id="imagem" [src]="pokemon.imagem" alt="imagem do pokemon" />
+    <div style="width: 300px">
+      <div
+        *ngIf="carregadaTodasInfomacoes"
+        id="habitat"
+        [style.background-image]="'url(' + pokemon.habitat + ')'"
+      >
+        <img id="imagem" [src]="pokemon.imagem" alt="imagem do pokemon" />
+      </div>
     </div>
+
     <button class="botao" (click)="proximo(true)">></button>
   </section>
 

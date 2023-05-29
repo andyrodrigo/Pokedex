@@ -1,20 +1,21 @@
-<main id="lista" style="height: 100%">
-  <div id="caixa_geracao" *ngIf="!chamado">
-    <button (click)="chamarGeracao(1)" class="botao">Generation 1</button>
-    <button (click)="chamarGeracao(2)" class="botao">Generation 2</button>
-    <button (click)="chamarGeracao(3)" class="botao">Generation 3</button>
-    <button (click)="chamarGeracao(4)" class="botao">Generation 4</button>
-    <button (click)="chamarGeracao(5)" class="botao">Generation 5</button>
-    <button (click)="chamarGeracao(0)" class="botao">Get'em All</button>
+<main id="lista" (scroll)="aoRolar($event)">
+  <div class="caixa_geracao">
+    <select
+      #combo
+      class="combo"
+      name="combo"
+      (change)="mudarLista(combo.value)"
+    >
+      <option *ngFor="let item of opcoes">{{ item }}</option>
+    </select>
   </div>
-  <div *ngFor="let pokemon of pokemons; let i = index">
+  <div *ngFor="let item of pokemons; let i = index">
     <app-item-lista
-      *ngIf="getAll"
-      [numero]="pokemon.id!"
-      [imagem]="pokemon.sprite!"
-      [nome]="pokemon.name!"
-      [tipo1]="pokemon.type1!"
-      [tipo2]="pokemon.type2!"
+      [numero]="item.id!"
+      [imagem]="item.sprite!"
+      [nome]="item.name!"
+      [tipo1]="item.type1!"
+      [tipo2]="item.type2!"
     ></app-item-lista>
   </div>
 </main>
