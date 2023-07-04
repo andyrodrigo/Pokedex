@@ -15,7 +15,7 @@ export class PokeListaComponent implements OnInit, OnDestroy {
   inscricaoPoke!: Subscription;
   pokemons: IPokemonItem[] = [];
   offset: number = 0; //a partir de
-  limit: number = 10;
+  limit: number = 15;
   maxLimit: number = 649;
   refIndice = 0;
   getAll: Boolean = false;
@@ -91,7 +91,13 @@ export class PokeListaComponent implements OnInit, OnDestroy {
 
   protected aoRolar(event: any) {
     const element = event.target;
-    const scrollLimite = 1;
+    const scrollLimite = 5;
+
+    // console.log('altura: ', element.scrollHeight);
+    // console.log('topo: ', element.scrollTop);
+    // console.log('dif: ', element.scrollHeight - element.scrollTop);
+    // console.log('atual: ', element.clientHeight);
+    // console.log('----------------');
 
     const fim_rolagem =
       element.scrollHeight - element.scrollTop <=
