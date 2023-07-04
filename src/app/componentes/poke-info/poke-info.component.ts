@@ -34,6 +34,7 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
     imagem: '/assets/images/missingNumber.png',
     altura: null,
     peso: null,
+    itens: [],
     tipo_1: null,
     tipo_2: null,
     habilidades: [],
@@ -72,6 +73,7 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
 
   private obterDados(dados: any): void {
     //console.log('dados: ', dados);
+
     this.pokemon.id = dados.id;
     this.pokemon.nome = dados.name;
     if (dados.id < 650) {
@@ -83,6 +85,7 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
     this.pokemon.altura = dados.height;
     this.pokemon.peso = dados.weight;
     this.pokemon.habilidades = dados.abilities;
+    this.pokemon.itens = dados.held_items;
     this.pokemon.tipo_1 = dados.types[0].type.name;
     this.pokemon.tipo_2 = dados.types[1]?.type.name;
     this.corTipo1 =
@@ -200,7 +203,7 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
     this.pokemon.habitat =
       Habitats[habitat as keyof typeof Habitats] || Habitats.padrao;
 
-    console.log(this.pokemon.habitat);
+    //console.log(this.pokemon.habitat);
   }
 
   private criarHabitat(tipo: string | null): string {
@@ -258,10 +261,10 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
   // }
 
   protected mudar() {
-    if (this.modo == 1) {
-      this.modo = 2;
-    } else {
+    if (this.modo === 3) {
       this.modo = 1;
+    } else {
+      this.modo++;
     }
   }
 

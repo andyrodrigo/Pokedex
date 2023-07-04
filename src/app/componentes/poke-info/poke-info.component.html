@@ -52,15 +52,13 @@
       <p *ngFor="let item of pokemon.info">{{ item["texto"] }}</p>
     </div>
 
-    <!-- <div id="telaHabilidades" *ngIf="modo == 1">
-      <app-stats
-        [ataqueF]="pokemon.ataqueF"
-        [ataqueE]="pokemon.ataqueE"
-        [defesaF]="pokemon.defesaF"
-        [defesaE]="pokemon.defesaE"
-        [velocidade]="pokemon.velocidade"
-        [saude]="pokemon.saude"
-      ></app-stats>
-    </div> -->
+    <div id="telaHabilidades" *ngIf="modo == 3">
+      <app-poke-details
+        [altura]="pokemon.altura!"
+        [peso]="pokemon.peso!"
+        [habilidades]="pokemon.habilidades"
+        [itens]="pokemon.itens"
+      ></app-poke-details>
+    </div>
   </section>
 </main>

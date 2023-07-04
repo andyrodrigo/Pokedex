@@ -1,0 +1,24 @@
+<main>
+  <div id="caixa_info" class="caixa_grande">
+    <div class="caixa_dado">
+      Weight: <strong>{{ converterPeso(peso) }}</strong>
+    </div>
+    <div class="caixa_dado">
+      Height: <strong>{{ converterAltura(altura) }}</strong>
+    </div>
+  </div>
+
+  <div id="caixa_habilidades" class="caixa_grande">
+    <span>Abilities:</span>
+    <div *ngFor="let item of habilidades" class="caixa_habilidades_lista">
+      <div class="caixa_habilidade">{{ item.ability!.name | titlecase }}</div>
+    </div>
+  </div>
+
+  <div id="caixa_itens" class="caixa_grande">
+    <span>Held Items:</span>
+    <div *ngFor="let item of itens" class="caixa_habilidades_lista">
+      <div class="caixa_item">{{ item.item!.name }}</div>
+    </div>
+  </div>
+</main>
