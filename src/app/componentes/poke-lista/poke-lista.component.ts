@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { forkJoin } from 'rxjs';
 
@@ -31,10 +31,15 @@ export class PokeListaComponent implements OnInit, OnDestroy {
     'Generation 5',
   ];
 
-  constructor(private pokeService: PokemonService) {}
+  constructor(
+    private pokeService: PokemonService,
+    private elementRef: ElementRef
+  ) {}
 
   ngOnInit(): void {
     this.gerarPokemons();
+    const mainElement = this.elementRef.nativeElement.querySelector('#lista');
+    mainElement.addEventListener('scroll', this.aoRolar.bind(this));
   }
 
   ngOnDestroy(): void {
@@ -86,8 +91,11 @@ export class PokeListaComponent implements OnInit, OnDestroy {
 
   protected aoRolar(event: any) {
     const element = event.target;
+    const scrollLimite = 1;
+
     const fim_rolagem =
-      element.scrollHeight - element.scrollTop === element.clientHeight;
+      element.scrollHeight - element.scrollTop <=
+      element.clientHeight + scrollLimite;
 
     if (
       fim_rolagem &&
