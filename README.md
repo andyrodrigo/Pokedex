@@ -10,11 +10,31 @@
 
 <https://andy-pokedex.netlify.app/>
 
+<img src="src/assets/images/layout.png"/>
+
 ## Tecnologias_usadas_no_desenvolvimento
 
-* **TypeScript** Linguagem de programação usada na criação do projeto
-* **Angular** Framework utilizado no desenvolvimento
-* **Bootstrap** Biblioteca de estilização dos componentes
+- **TypeScript** Linguagem de programação usada na criação do projeto
+- **Angular** Framework utilizado no desenvolvimento
+- **Bootstrap** Biblioteca de estilização dos componentes
+
+## Recursos
+
+> O carregamento da lista é dinâmico, trazendo os próximos pokemons de acordo com a rolagem da pokédex. Você também pode escolher trazer apenas pokemons de uma determinada geração, mas por padrão ela trará todos em ordem pela opção "Get'em all".
+
+<img src="src/assets/images/escolherGeracao.png"/>
+
+> Ao clicar em algum pokemon da lista, os detalhes serão mostrados. Tendo opção de exibir "informações" ou "Atributos", usando o botão: mode. Ou retorna usando o botão "back".
+
+<img src="src/assets/images/mode.png"/>
+
+> A pokédex reconhece o habitat de cada Pokemon e a exibe como fundo de tela.
+
+<img src="src/assets/images/habitat.png"/>
+
+> Os atributos mostram os ataques e defesa físico e especiais, além da enérgia e velocidade de cada pokémon.
+
+<img src="src/assets/images/atributos.png"/>
 
 ## Etapas Iniciais
 
@@ -24,5 +44,12 @@
 - [x] Layout da tela do projeto
 - [x] Listagem dos Pokemons
 - [x] Layout da tela de listagem
-- [ ] Exibição de Informações do Pokemon escolhido
-- [ ] Layout da tela do Pokemon escolhido
+- [x] Exibição de Informações do Pokemon escolhido
+- [x] Layout da tela do Pokemon escolhido
+
+## Próximas etapas
+
+- [ ] Trazer habilidades em um dos modos
+- [ ] Trazer outras informações em um dos modos
+- [ ] Opção de grupo de Ovos na listagem
+- [ ] Opção de buscar por nome do pokemon na listagem
