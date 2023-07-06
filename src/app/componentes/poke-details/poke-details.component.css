@@ -1,45 +1,51 @@
 #caixa_info {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
 }
 
-#caixa_habilidades {
-  display: flex;
-  flex-direction: column;
-  font-family: monospace;
-}
-
-#caixa_habilidades > span {
-  margin: 0 10px;
-}
-
-#caixa_itens {
-  display: flex;
-  flex-direction: column;
-  font-family: monospace;
-}
-
-#caixa_itens > span {
-  margin: 0 10px;
-}
-
 .caixa_grande {
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
   border: solid 1px black;
   border-radius: 10px;
   margin: 5px;
   background-color: aliceblue;
 }
 
-.caixa_habilidades_lista {
+.caixa_grande > span {
+  margin: 0 10px;
+}
+
+.caixa_lista {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 5px 0;
 }
 
+.caixa_dados {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
 .caixa_dado {
+  display: flex;
+  align-items: center;
   margin: 2px;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+strong > span {
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.caixa_coluna {
+  width: 90%;
+  display: flex;
 }
 
 .caixa_habilidade {
@@ -58,4 +64,12 @@
   width: 90%;
   text-align: center;
   font-weight: bold;
+}
+
+.circulo {
+  margin: 0 3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #000000;
 }

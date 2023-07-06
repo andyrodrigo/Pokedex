@@ -10,6 +10,7 @@ import { ItemListaComponent } from './componentes/item-lista/item-lista.componen
 import { PokeInfoComponent } from './componentes/poke-info/poke-info.component';
 import { StatsComponent } from './componentes/stats/stats.component';
 import { PokeDetailsComponent } from './componentes/poke-details/poke-details.component';
+import { PokeMoveComponent } from './componentes/poke-move/poke-move.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { PokeDetailsComponent } from './componentes/poke-details/poke-details.co
     PokeInfoComponent,
     StatsComponent,
     PokeDetailsComponent,
+    PokeMoveComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

@@ -34,10 +34,15 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
     imagem: '/assets/images/missingNumber.png',
     altura: null,
     peso: null,
+    experiencia: null,
+    felicidade: null,
+    taxa_captura: null,
+    taxa_genero: null,
     itens: [],
     tipo_1: null,
     tipo_2: null,
     habilidades: [],
+    moves: [],
     ataqueF: '',
     defesaF: '',
     ataqueE: '',
@@ -72,7 +77,7 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
   }
 
   private obterDados(dados: any): void {
-    //console.log('dados: ', dados);
+    //console.log('dados: ', dados.moves);
 
     this.pokemon.id = dados.id;
     this.pokemon.nome = dados.name;
@@ -84,7 +89,9 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
 
     this.pokemon.altura = dados.height;
     this.pokemon.peso = dados.weight;
+    this.pokemon.experiencia = dados.base_experience;
     this.pokemon.habilidades = dados.abilities;
+    this.pokemon.moves = dados.moves;
     this.pokemon.itens = dados.held_items;
     this.pokemon.tipo_1 = dados.types[0].type.name;
     this.pokemon.tipo_2 = dados.types[1]?.type.name;
@@ -115,7 +122,12 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
   }
 
   private obterMaisDados(dados: any): void {
-    //console.log('dados: ', dados);
+    console.log('dados: ', dados);
+
+    this.pokemon.felicidade = dados.base_happiness;
+    this.pokemon.taxa_captura = dados.capture_rate;
+    this.pokemon.taxa_genero = dados.gender_rate;
+
     const textosUnicos = dados.flavor_text_entries.reduce(
       (acc: any, entry: any) => {
         if (entry.language.name === 'en') {
@@ -184,7 +196,7 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
         habitat = 'deep_sea';
       } else {
         if (dados.is_legendary) {
-          console.log('HEY ', this.pokemon.nome);
+          //console.log('HEY ', this.pokemon.nome);
           if (
             this.pokemon.nome === 'tornadus-incarnate' ||
             this.pokemon.nome === 'landorus-incarnate' ||
@@ -261,7 +273,7 @@ export class PokeInfoComponent implements OnInit, OnDestroy {
   // }
 
   protected mudar() {
-    if (this.modo === 3) {
+    if (this.modo === 4) {
       this.modo = 1;
     } else {
       this.modo++;

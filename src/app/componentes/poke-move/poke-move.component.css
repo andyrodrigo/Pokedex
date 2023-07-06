@@ -1,0 +1,52 @@
+.nave-item {
+  cursor: pointer;
+}
+
+.caixa_gen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.caixa_button {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 10px 0;
+}
+
+.caixa_moves {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.caixa_move_level {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.botao {
+  margin: 2px;
+  border-radius: 10px;
+  font-family: monospace;
+  background-color: #00302a;
+  color: #dddddd;
+  box-shadow: black 0 2px;
+}
+
+.botao:hover {
+  color: goldenrod;
+}
+
+.botao:active {
+  color: red;
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.contorno {
+  font-weight: bolder;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+}

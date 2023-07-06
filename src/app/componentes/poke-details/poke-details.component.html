@@ -1,23 +1,62 @@
 <main>
-  <div id="caixa_info" class="caixa_grande">
-    <div class="caixa_dado">
-      Weight: <strong>{{ converterPeso(peso) }}</strong>
-    </div>
-    <div class="caixa_dado">
-      Height: <strong>{{ converterAltura(altura) }}</strong>
+  <div class="caixa_grande">
+    <span>Details:</span>
+    <div></div>
+    <div class="caixa_lista">
+      <div class="caixa_coluna">
+        <div style="width: 50%">
+          Weight: <strong>{{ converterPeso(peso) }}</strong>
+        </div>
+        <div style="width: 50%">
+          Height: <strong>{{ converterAltura(altura) }}</strong>
+        </div>
+      </div>
+      <div class="caixa_coluna">
+        <div style="width: 50%">
+          Exp-Yield: <strong>{{ experiencia }}</strong>
+        </div>
+        <div style="width: 50%">
+          Happiness: <strong>{{ felicidade }} &#9829;</strong>
+        </div>
+      </div>
+      <div class="caixa_coluna">
+        <div style="width: 50%; display: flex; align-items: center">
+          Capture-Rate:
+          <strong>{{ taxa_captura }}</strong>
+          <div
+            class="circulo"
+            [style.background-color]="
+              'rgb(' +
+              taxa_captura +
+              ',' +
+              taxa_captura +
+              ',' +
+              taxa_captura +
+              ')'
+            "
+          ></div>
+        </div>
+        <div style="width: 50%">
+          G-Rate:<strong
+            ><span>&#9794;</span>{{ calcularTaxa_Genero(taxa_genero, true) }}
+            <span>&#9792;</span
+            >{{ calcularTaxa_Genero(taxa_genero, false) }}</strong
+          >
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="caixa_habilidades" class="caixa_grande">
+  <div class="caixa_grande">
     <span>Abilities:</span>
-    <div *ngFor="let item of habilidades" class="caixa_habilidades_lista">
+    <div *ngFor="let item of habilidades" class="caixa_lista">
       <div class="caixa_habilidade">{{ item.ability!.name | titlecase }}</div>
     </div>
   </div>
 
-  <div id="caixa_itens" class="caixa_grande">
+  <div class="caixa_grande">
     <span>Held Items:</span>
-    <div *ngFor="let item of itens" class="caixa_habilidades_lista">
+    <div *ngFor="let item of itens" class="caixa_lista">
       <div class="caixa_item">{{ item.item!.name }}</div>
     </div>
   </div>

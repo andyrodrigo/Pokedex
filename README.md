@@ -24,7 +24,7 @@
 
 <img src="src/assets/images/escolherGeracao.png"/>
 
-> Ao clicar em algum pokemon da lista, os detalhes serão mostrados. Tendo opção de exibir "informações" ou "Atributos", usando o botão: mode. Ou retorna usando o botão "back".
+> Ao clicar em algum pokemon da lista, os detalhes serão mostrados. Tendo opção de exibir "informações","Atributos","Detalhes" e "Golpes", usando o botão: mode para mudar a exibição. O botão "back" retorna a lista.
 
 <img src="src/assets/images/mode.png"/>
 
@@ -35,6 +35,10 @@
 > Os atributos mostram os ataques e defesa físico e especiais, além da enérgia e velocidade de cada pokémon.
 
 <img src="src/assets/images/atributos.png"/>
+
+> A lista de Golpes é vista pela Geração nas abas, clique para ver cada aba.
+
+<img src="src/assets/images/lista_golpes.png"/>
 
 ## Etapas Iniciais
 
@@ -49,7 +53,9 @@
 
 ## Próximas etapas
 
-- [ ] Trazer habilidades em um dos modos
-- [ ] Trazer outras informações em um dos modos
+- [x] Trazer habilidades em um dos modos
+- [x] Trazer outras informações em um dos modos
+- [x] Trazer Golpes em um dos modos
+- [x] Trazer grupo de Ovos em um dos modos
 - [ ] Opção de grupo de Ovos na listagem
 - [ ] Opção de buscar por nome do pokemon na listagem
