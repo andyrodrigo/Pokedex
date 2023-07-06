@@ -48,17 +48,25 @@
       ></app-stats>
     </div>
 
-    <div id="telaTextos" *ngIf="modo == 2">
-      <p *ngFor="let item of pokemon.info">{{ item["texto"] }}</p>
-    </div>
-
-    <div id="telaHabilidades" *ngIf="modo == 3">
+    <div id="telaHabilidades" *ngIf="modo == 2">
       <app-poke-details
         [altura]="pokemon.altura!"
         [peso]="pokemon.peso!"
+        [felicidade]="pokemon.felicidade!"
+        [experiencia]="pokemon.experiencia!"
+        [taxa_captura]="pokemon.taxa_captura!"
+        [taxa_genero]="pokemon.taxa_genero!"
         [habilidades]="pokemon.habilidades"
         [itens]="pokemon.itens"
       ></app-poke-details>
+    </div>
+
+    <div id="telaTextos" *ngIf="modo == 3">
+      <p *ngFor="let item of pokemon.info">{{ item["texto"] }}</p>
+    </div>
+
+    <div id="telaMoves" *ngIf="modo == 4">
+      <app-poke-move [id]="pokemon.id" [moves]="pokemon.moves"></app-poke-move>
     </div>
   </section>
 </main>

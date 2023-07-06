@@ -1,0 +1,240 @@
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item nave-item" [hidden]="moves_g1.length === 0">
+        <a
+          id="tab1"
+          class="nav-link"
+          [class.active]="gen.gen1"
+          (click)="mostrarDiv(1)"
+          >1</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g2.length === 0">
+        <a
+          id="tab2"
+          class="nav-link"
+          [class.active]="gen.gen2"
+          (click)="mostrarDiv(2)"
+          >2</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g3.length === 0">
+        <a
+          id="tab3"
+          class="nav-link"
+          [class.active]="gen.gen3"
+          (click)="mostrarDiv(3)"
+          >3</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g4.length === 0">
+        <a
+          id="tab4"
+          class="nav-link"
+          [class.active]="gen.gen4"
+          (click)="mostrarDiv(4)"
+          >4</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g5.length === 0">
+        <a
+          id="tab5"
+          class="nav-link"
+          [class.active]="gen.gen5"
+          (click)="mostrarDiv(5)"
+          >5</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g6.length === 0">
+        <a
+          id="tab6"
+          class="nav-link"
+          [class.active]="gen.gen6"
+          (click)="mostrarDiv(6)"
+          >6</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g7.length === 0">
+        <a
+          id="tab7"
+          class="nav-link"
+          [class.active]="gen.gen7"
+          (click)="mostrarDiv(7)"
+          >7</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g8.length === 0">
+        <a
+          id="tab8"
+          class="nav-link"
+          [class.active]="gen.gen8"
+          (click)="mostrarDiv(8)"
+          >8</a
+        >
+      </li>
+      <li class="nav-item nave-item" [hidden]="moves_g9.length === 0">
+        <a
+          id="tab9"
+          class="nav-link"
+          [class.active]="gen.gen9"
+          (click)="mostrarDiv(9)"
+          >9</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <div class="caixa_gen">
+      <div class="caixa_button">
+        <button class="botao" (click)="metodoAtual = 'level-up'">Level</button>
+        <button class="botao" (click)="metodoAtual = 'machine'">Machine</button>
+        <button class="botao" (click)="metodoAtual = 'tutor'">Tutor</button>
+        <button class="botao" (click)="metodoAtual = 'egg'">Egg</button>
+      </div>
+      <div class="caixa_moves">
+        <div *ngIf="gen.gen1">
+          <span style="color: red"> <strong>Red</strong> </span>
+          -
+          <span style="color: blue"><strong>Blue</strong></span>
+          <div *ngFor="let item of moves_g1">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen2">
+          <span class="contorno" style="color: gold">Gold</span> -
+          <span class="contorno" style="color: silver">Silver</span>
+          <div *ngFor="let item of moves_g2">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen3">
+          <span style="color: #e0115f"><strong>Ruby</strong></span> -
+          <span style="color: #0f52ba"><strong>Saphire</strong></span>
+          <div *ngFor="let item of moves_g3">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen4">
+          <span class="contorno" style="color: #b9f2ff">Diamond</span>
+          -
+          <span class="contorno" style="color: #f8f8ff">Pearl</span>
+          <div *ngFor="let item of moves_g4">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen5">
+          <span
+            style="
+              color: black;
+              background-color: white;
+              border: solid black 1px;
+              border-radius: 10px;
+              padding: 0 5px;
+            "
+            ><strong>Black</strong>
+          </span>
+          -
+          <span
+            style="
+              color: white;
+              background-color: black;
+              border-radius: 10px;
+              padding: 0 5px;
+            "
+            ><strong>White</strong></span
+          >
+          <div *ngFor="let item of moves_g5">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen6">
+          <span
+            style="
+              color: black;
+              background-color: #ffd700;
+              border: solid black 1px;
+              border-radius: 10px;
+              padding: 0 5px;
+            "
+            ><strong>Sun</strong>
+          </span>
+          -
+          <span
+            style="
+              color: black;
+              background-color: #f0f8ff;
+              border: solid black 1px;
+              border-radius: 10px;
+              padding: 0 5px;
+            "
+            ><strong>Moon</strong></span
+          >
+          <div *ngFor="let item of moves_g6">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen7">
+          <span class="contorno" style="color: white"> <strong>X</strong></span>
+          -
+          <span class="contorno" style="color: white"><strong>Y</strong></span>
+          <div *ngFor="let item of moves_g7">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen8">
+          <span style="color: black"> <strong>Sword</strong></span>
+          -
+          <span style="color: black"><strong>Shield</strong></span>
+          <div *ngFor="let item of moves_g8">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="gen.gen9">
+          <span style="color: #ff2400"> <strong>Scarlat</strong></span>
+          -
+          <span style="color: #8b00ff"><strong>Violet</strong></span>
+          <div *ngFor="let item of moves_g9">
+            <div class="caixa_move_level" *ngIf="item.metodo === metodoAtual">
+              <div>{{ item.nome }}</div>
+              <div>{{ item.level }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
